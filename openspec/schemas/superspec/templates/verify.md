@@ -6,6 +6,7 @@
 
 **Change**: `<change-name>`
 **Verified at**: `YYYY-MM-DD HH:mm`
+**Iteration**: `<integer; copy from apply.md>`
 **Verifier**: `<who / which agent>`
 
 ---
@@ -77,10 +78,21 @@ Scenarios in `specs/*.md`:
 
 ## Overall Decision
 
-- [ ] ✅ PASS — ready to proceed with finishing-a-development-branch and archive
+- [ ] ✅ PASS — ready to proceed via /opsx:continue to the finalize artifact, then /opsx:archive
 - [ ] ⚠️ PASS WITH WARNINGS — can proceed but note: `<explanation>`
 - [ ] ❌ FAIL — return to the failed artifact, fix, then re-run verify
 
 **Next step**:
 
 <describe the next action>
+
+> **Convergence loop reminder**:
+> - PASS / PASS_WITH_WARNINGS → `/opsx:continue` advances to the finalize
+>   artifact. Invoke superpowers:finishing-a-development-branch through
+>   it, then `/opsx:archive` once finalize.md exists.
+> - FAIL with items fixable by code change → return to the apply artifact
+>   and re-run `/opsx:apply`, then re-run `/opsx:verify` — this overwrites
+>   both apply.md and verify.md with the next iteration.
+> - FAIL with artifact-level items → fix the offending artifact, then
+>   re-enter apply.
+> - Iteration > 5 → stop the loop and report to the user.
