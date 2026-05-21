@@ -1,3 +1,5 @@
+import { getRandomPhrase } from './words.js';
+
 const STORAGE_KEY = 'vanilla-todo-app';
 
 let todos = [];
@@ -131,3 +133,4 @@ document.getElementById('filters').addEventListener('click', (e) => {
 
 loadTodos();
 render();
+document.getElementById('flavour-text').textContent = getRandomPhrase();
